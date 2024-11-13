@@ -1,0 +1,130 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Овощи",
+        "description": "Свежие овощи"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Одежда",
+        "description": "Одежда для мужчин, женщин и детей"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Томаты",
+        "description": "Томаты розовые",
+        "image": "",
+        "category": 1,
+        "price": 129.9,
+        "created_at": "2024-11-11T09:00:27.106Z",
+        "updated_at": "2024-11-11T09:00:27.106Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Огурцы",
+        "description": "Огурцы салатные",
+        "image": "",
+        "category": 1,
+        "price": 149.9,
+        "created_at": "2024-11-11T09:01:08.066Z",
+        "updated_at": "2024-11-11T09:01:08.066Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Лук",
+        "description": "Лук репчатый",
+        "image": "",
+        "category": 1,
+        "price": 99.9,
+        "created_at": "2024-11-11T09:01:43.464Z",
+        "updated_at": "2024-11-11T09:01:43.464Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Яблоки",
+        "description": "Яблоки Гренни Смит",
+        "image": "",
+        "category": 2,
+        "price": 200.0,
+        "created_at": "2024-11-11T09:03:14.265Z",
+        "updated_at": "2024-11-11T09:03:14.265Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Яблоки",
+        "description": "Яблоки Ред Чиф",
+        "image": "",
+        "category": 2,
+        "price": 215.0,
+        "created_at": "2024-11-11T09:03:46.531Z",
+        "updated_at": "2024-11-11T09:03:46.531Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "Манго",
+        "description": "Манго Перу",
+        "image": "",
+        "category": 2,
+        "price": 350.0,
+        "created_at": "2024-11-11T09:04:27.748Z",
+        "updated_at": "2024-11-11T09:28:09.481Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "Футболка",
+        "description": "Футболка белая, оверсайз, унисекс",
+        "image": "",
+        "category": 3,
+        "price": 999.9,
+        "created_at": "2024-11-11T09:05:33.138Z",
+        "updated_at": "2024-11-11T09:05:33.138Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "name": "Шорты",
+        "description": "Шорты черные, свободного кроя, женские",
+        "image": "",
+        "category": 3,
+        "price": 799.9,
+        "created_at": "2024-11-11T09:06:44.050Z",
+        "updated_at": "2024-11-11T09:06:44.050Z"
+    }
+}
+]
