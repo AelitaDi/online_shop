@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% block title %} Контакты {% endblock %}
+{% block title1 %}
+<div class="pricing-header px-2 pb-md-4 text-center">
+    <h1 class="display-5">Контакты</h1>
+</div>
+{% endblock %}
+{% block content %}
+<div id="content" class="colM">
+
+    <h1>Add продукт</h1>
+
+    <div id="content-main">
+
+
+        <form enctype="multipart/form-data" method="post" id="product_form" novalidate><input type="hidden"
+                                                                                              name="csrfmiddlewaretoken"
+                                                                                              value="4stfzyko9wAi7cuNAz8I8hK2jU2bWU7vwrn3ekTTlmKWzg3BbhCyatRLP97MJe3x">
+            <div>
+
+
+                <fieldset class="module aligned ">
+
+
+                    <div class="form-row field-name">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label class="required" for="id_name">Наименование:</label>
+
+                                <input type="text" name="name" class="vTextField" maxlength="250" required
+                                       aria-describedby="id_name_helptext" id="id_name">
+
+
+                            </div>
+
+                            <div class="help" id="id_name_helptext">
+                                <div>Введите наименование товара</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-description">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label for="id_description">Описание товара:</label>
+
+                                <textarea name="description" cols="40" rows="10" class="vLargeTextField"
+                                          aria-describedby="id_description_helptext" id="id_description">
+</textarea>
+
+
+                            </div>
+
+                            <div class="help" id="id_description_helptext">
+                                <div>Введите описание товара</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-image">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label for="id_image">Изображение:</label>
+
+                                <input type="file" name="image" accept="image/*" aria-describedby="id_image_helptext"
+                                       id="id_image">
+
+
+                            </div>
+
+                            <div class="help" id="id_image_helptext">
+                                <div>Загрузите изображение товара</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-category">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label class="required" for="id_category">Категория:</label>
+
+                                <div class="related-widget-wrapper" data-model-ref="category">
+                                    <select name="category" data-context="available-source" required id="id_category">
+                                        <option value="" selected>---------</option>
+
+                                        <option value="1">Овощи</option>
+
+                                        <option value="3">Одежда</option>
+
+                                        <option value="2">Фрукты</option>
+
+                                    </select>
+
+                                    <a class="related-widget-wrapper-link change-related" id="change_id_category"
+                                       data-href-template="/admin/catalog/category/__fk__/change/?_to_field=id&amp;_popup=1"
+                                       data-popup="yes"
+                                       title="Change selected категория"><img
+                                            src="/static/admin/img/icon-changelink.svg" alt="" width="20"
+                                            height="20"></a><a class="related-widget-wrapper-link add-related"
+                                                               id="add_id_category"
+                                                               data-popup="yes"
+                                                               href="/admin/catalog/category/add/?_to_field=id&amp;_popup=1"
+                                                               title="Add another категория"><img
+                                        src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a
+                                        class="related-widget-wrapper-link view-related" id="view_id_category"
+                                        data-href-template="/admin/catalog/category/__fk__/change/?_to_field=id"
+                                        title="View selected категория"><img src="/static/admin/img/icon-viewlink.svg"
+                                                                             alt="" width="20" height="20"></a>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-price">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label class="required" for="id_price">Стоимость единицы товара:</label>
+
+                                <input type="number" name="price" step="any" required
+                                       aria-describedby="id_price_helptext" id="id_price">
+
+
+                            </div>
+
+                            <div class="help" id="id_price_helptext">
+                                <div>Введите стоимость единицы товара</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </fieldset>
+
+
+                <div class="submit-row">
+
+                    <input type="submit" value="Save" class="default" name="_save">
+
+                    <input type="submit" value="Save and add another" name="_addanother">
+                    <input type="submit" value="Save and continue editing" name="_continue">
+
+
+                </div>
+
+
+                <script id="django-admin-form-add-constants"
+                        src="/static/admin/js/change_form.js"
+
+                        data-model-name="product"
+
+                        async>
+                </script>
+
+
+                <script id="django-admin-prepopulated-fields-constants"
+                        src="/static/admin/js/prepopulate_init.js"
+                        data-prepopulated-fields="[]">
+                </script>
+
+
+            </div>
+        </form>
+    </div>
+    {% endblock %}
