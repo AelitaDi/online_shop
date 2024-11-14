@@ -1,7 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
+
 from .models import Contacts, Product, Category
 from django.core.paginator import Paginator
+from .forms import ProductForm
 
 
 def products_list(request):
@@ -59,19 +62,13 @@ def add_product(request):
     Контроллер обрабатывает POST-запрос на добавление нового товара.
     """
     if request.method == "POST":
-        name = request.POST.get("name")
-        description = request.POST.get("description")
-        category_obj = request.POST.get("category")
-        categories = Category.objects.all()
-        for category in categories:
-            if str(category_obj) == str(category.id):
-                target_category = category
-            else:
-                return HttpResponse(f"Выбранная категория не существует.")
-        price = request.POST.get("price")
-        image = request.POST.get("image")
-        product = Product.objects.create(name=name, description=description, price=price, category=target_category,
-                                         image=image)
-        product.save()
-        return HttpResponse(f"Спасибо, товар добавлен в каталог.")
-    return render(request, 'add_product.html')
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.created_at = timezone.now()
+            product.updated_at = timezone.now()
+            product.save()
+            return render(request, 'product_info.html', {"product": product})
+    else:
+        form = ProductForm()
+        return render(request, 'new_product.html', {'form': form})
