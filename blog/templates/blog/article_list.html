@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+{% block title %} Главная {% endblock %}
+{% block title1 %}
+<div class="pricing-header px-2 pb-md-4 text-center">
+   {% include 'blog/includes/header.html' %}
+    <h3>Посмотрите наши последние статьи:</h3>
+</div>
+{% endblock %}
+{% block content %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="row text-center">
+        {% for article in object_list %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ article.heading }}</h4>
+                </div>
+                <div class="card-body">
+                    <img src="{{ article.image | media_filter }}" class="img-fluid">
+                    <p><a href="{% url 'blog:article_detail' article.pk %}"
+                          class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Подробнее...</a>
+                    </p>
+                    <p>{{ article.content|truncatechars:100 }}</p>
+                    <div class="card-text"><small class="text-body-secondary">Просмотры: {{ article.views_count }}</small></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {% for p in page_obj.paginator.page_range %}
+                        {% if page_obj.number == p %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">{{ p }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a href="?page={{ p }}" class="page-link">{{ p }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

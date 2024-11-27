@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Всё про Всё {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Всё про Всё</title>
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        {% include 'blog/includes/nav_menu.html' %}
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-9 mt-5 ms-5">
+                {% block title1%}<h1 class="text-center pb-3">Добро пожаловать в SkyStore</h1>{% endblock %}
+                {% block content %}
+                {% endblock %}
+                {% include 'blog/includes/footer.html' %}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

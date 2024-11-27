@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 {% block title %} Контакты {% endblock %}
 {% block title1 %}
 <div class="pricing-header px-2 pb-md-4 text-center">
@@ -12,18 +12,20 @@
             <div class="card mb-5 box-shadow">
                 <div class="card-body">
                     <table class="table table-striped">
+                        {% for object in object_list %}
                         <tr>
                             <td class="w-25">Страна</td>
-                            <td>{{ country }}</td>
+                            <td>{{ object.country }}</td>
                         </tr>
                         <tr>
                             <td class="w-25">ИНН</td>
-                            <td>{{ inn }}</td>
+                            <td>{{ object.inn }}</td>
                         </tr>
                         <tr>
                             <td class="w-25">Адрес</td>
-                            <td>{{ address }}</td>
+                            <td>{{ object.address }}</td>
                         </tr>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
