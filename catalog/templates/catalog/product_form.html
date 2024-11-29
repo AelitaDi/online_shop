@@ -2,45 +2,60 @@
 {% block title %} Добавление нового товара {% endblock %}
 {% block title1 %}
 <div class="pricing-header px-2 pb-md-4 text-center">
-    <h1 class="display-5">Добавьте новый товар</h1>
+    <h1 class="display-5">{% if object %}
+        Редактирование продукта
+        {% else %}
+        Добавление продукта
+        {% endif %}</h1>
 </div>
 {% endblock %}
 
 {% block content %}
-<form method="POST" class="post-form row" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="col-6">
+<div class="col-6">
+    <form method="POST" class="post-form row" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="mb-3">
-            <label for="name" class="form-label">Наименование товара</label>
-            <input type="text" class="form-control" id="name" name="name"
-                   placeholder="Введите наименование товара">
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label">Категория</label>
-            <select id="category" name="category" class="form-select" required>
-                <option selected>Выберите категорию товара</option>
-                {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
+            <label>Наименование</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+            <small class="text-danger">{{ form.name.errors.0 }}</small>
+            {% endif %}
         </div>
         <div class="mb-3">
-            <label for="price" class="form-label">Укажите стоимость</label>
-            <input type="number" step="any" name="price" id="price" class="form-control">
+            <label>Описание</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+            <small class="text-danger">{{ form.description.errors.0 }}</small>
+            {% endif %}
         </div>
-        <div>
-            <label for="image" class="form-label">Изображение</label>
-            <input class="form-control mb-5" name="image" type="file" id="image"
-                   placeholder="Загрузите изображение товара">
-        </div>
-    </div>
-    <div class="col-6">
         <div class="mb-3">
-            <label for="description" class="form-label">Описание</label>
-            <textarea class="form-control" id="description" rows="9" name="description"
-                      placeholder="Введите описание товара"></textarea>
+            <label>Цена:</label>
+            {{ form.price }}
+            {% if form.price.errors %}
+            <small class="text-danger">{{ form.price.errors.0 }}</small>
+            {% endif %}
         </div>
-        <button type="submit" class="save btn btn-outline-primary">Добавить</button>
-    </div>
-</form>
+        <div class="mb-3">
+            <label>Изображение</label>
+            {{ form.image }}
+            {% if form.image.errors %}
+            <small class="text-danger">{{ form.image.errors.0 }}</small>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label>Категория</label>
+            {{ form.category }}
+            {% if form.category.errors %}
+            <small class="text-danger">{{ form.category.errors.0 }}</small>
+            {% endif %}
+        </div>
+        <button type="submit" class="save btn btn-outline-primary">
+            {% if object %}
+            Сохранить изменения
+            {% else %}
+            Добавить продукт
+            {% endif %}
+        </button>
+    </form>
+</div>
 {% endblock %}

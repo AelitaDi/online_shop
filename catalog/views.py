@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Contacts, Product, Category
+
+from .forms import ProductForm
 
 
 class ProductListView(ListView):
@@ -17,13 +19,24 @@ class ProductDetail(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'description', 'image', 'category', 'price',)
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:product_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:product_list')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:product_list')
 
 
 class ContactsListView(ListView):
