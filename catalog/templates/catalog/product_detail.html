@@ -16,8 +16,9 @@
                 <div class="card-body">
                     <img src="{{ object.image | media_filter }}" class="img-fluid mb-3">
                     <p>{{ object.description }}</p>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">₽ {{ object.price }}
-                    </button>
+                    <h4>₽ {{ object.price }}</h4>
+                    <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_update' object.pk %}">Редактировать</a>
+                    <a type="button" class="btn btn-lg btn-block btn-outline-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
                 </div>
             </div>
         </div>
