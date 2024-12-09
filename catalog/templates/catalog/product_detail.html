@@ -7,20 +7,22 @@
 </div>
 {% endblock %}
 {% block content %}
-    <div class="row text-center">
-        <div class="col-12">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h2 class="card-title pricing-card-title">{{ object.name }}</h2>
-                </div>
-                <div class="card-body">
-                    <img src="{{ object.image | media_filter }}" class="img-fluid mb-3">
-                    <p>{{ object.description }}</p>
-                    <h4>₽ {{ object.price }}</h4>
-                    <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_update' object.pk %}">Редактировать</a>
-                    <a type="button" class="btn btn-lg btn-block btn-outline-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
-                </div>
+<div class="row text-center">
+    <div class="col-12">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h2 class="card-title pricing-card-title">{{ object.name }}</h2>
+            </div>
+            <div class="card-body">
+                <img src="{{ object.image | media_filter }}" class="img-fluid mb-3">
+                <p>{{ object.description }}</p>
+                <h4>₽ {{ object.price }}</h4>
+                {% if user == object.owner or perms.catalog.can_unpublish_product %}
+                <a type="button" class="btn btn-lg btn-block btn-outline-primary"
+                   href="{% url 'catalog:product_update' object.pk %}">Редактировать</a>
+                {% endif %}
             </div>
         </div>
+    </div>
 </div>
 {% endblock %}
