@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -38,14 +39,16 @@ class ArticleCreateView(CreateView):
     success_url = reverse_lazy('blog:article_list')
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Article
     fields = ['heading', 'content', 'image', 'is_published']
+    permission_required = 'blog.change_article'
 
     def get_success_url(self):
         return reverse_lazy('blog:article_detail', args=[self.kwargs.get('pk')])
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Article
     success_url = reverse_lazy('blog:article_list')
+    permission_required = 'blog.delete_article'

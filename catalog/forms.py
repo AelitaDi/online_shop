@@ -20,7 +20,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'description', 'price', 'image', 'category',)
+        fields = ('name', 'description', 'price', 'image', 'category', 'is_published',)
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -62,3 +62,9 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         if price < 0:
             raise ValidationError('Стоимость продукта не может быть меньше 0')
         return price
+
+
+class ProductModerForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('is_published',)

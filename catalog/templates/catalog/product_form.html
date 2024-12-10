@@ -49,13 +49,18 @@
             <small class="text-danger">{{ form.category.errors.0 }}</small>
             {% endif %}
         </div>
-        <button type="submit" class="save btn btn-outline-primary">
+        <div class="mb-3">
+            <label>Признак публикации</label>
+            {{ form.is_published }}
+        </div>
+        <button type="submit" class="mb-3 save btn btn-outline-primary">
             {% if object %}
             Сохранить изменения
             {% else %}
             Добавить продукт
             {% endif %}
         </button>
+        <a type="button" class="btn btn-outline-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
     </form>
 </div>
 {% endblock %}
