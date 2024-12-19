@@ -1,23 +1,35 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from config.settings import CACHE_ENABLED
 from .models import Contacts, Product, Category
 
 from .forms import ProductForm, ProductModerForm
+from .services import get_products_from_category
 
 
 class ProductListView(ListView):
     model = Product
     paginate_by = 3
 
+    def get_queryset(self):
+        if not CACHE_ENABLED:
+            return super().get_queryset()
+        key = "products_list"
+        products = cache.get(key)
+        if products is not None:
+            return products
+        products = super().get_queryset()
+        cache.set(key, products, 60 * 15)
+        return products
 
-class ProductDetail(LoginRequiredMixin, DetailView):
+
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
-
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
@@ -78,3 +90,13 @@ class ContactsListView(ListView):
         phone = self.request.POST.get("phone")
         message = self.request.POST.get("message")
         return HttpResponse(f"Спасибо, {name.title()}! Сообщение получено.")
+
+
+class CategoryDetailView(LoginRequiredMixin, DetailView):
+    model = Category
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.object.pk
+        context['products'] = get_products_from_category(pk)
+        return context

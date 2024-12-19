@@ -21,6 +21,10 @@
                 <a type="button" class="btn btn-lg btn-block btn-outline-primary"
                    href="{% url 'catalog:product_update' object.pk %}">Редактировать</a>
                 {% endif %}
+                <a type="button" class="btn btn-lg btn-block btn-outline-primary"
+                   href="{% url 'catalog:category_detail' object.category.pk %}">Все продукты этой категории</a>
+                <a type="button" class="btn btn-lg btn-block btn-outline-primary"
+                   href="{% url 'catalog:product_list'%}">На Главную</a>
             </div>
         </div>
     </div>
